@@ -4,25 +4,25 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  TouchableHighlight,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
 
+import InputField from "../components/InputField";
+import SubmitButton from "../components/SubmitButton";
 import colours from "../config/colours";
 
-function LoginScreen() {
+const LoginScreen = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleChangeEmail(text) {
-    setEmail(text);
-  }
+  const handleChangeEmail = (value) => {
+    setEmail(value);
+  };
 
-  function handleChangePassword(text) {
-    setPassword(text);
-  }
+  const handleChangePassword = (value) => {
+    setPassword(value);
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -32,35 +32,28 @@ function LoginScreen() {
           <Text style={styles.titleText}>My Recipes</Text>
         </View>
         <View style={styles.formContainer}>
-          <TextInput
-            style={styles.input}
-            onChangeText={handleChangeEmail}
+          <InputField
+            key="email"
+            id="email"
             value={email}
-            placeholder="Email"
+            isSecure={false}
+            onChange={handleChangeEmail}
           />
-          <TextInput
-            style={styles.input}
-            onChangeText={handleChangePassword}
+          <InputField
+            key="password"
+            id="password"
             value={password}
-            secureTextEntry={true}
-            placeholder="Password"
+            isSecure={true}
+            onChange={handleChangePassword}
           />
-          <TouchableHighlight style={styles.loginButton}>
-            <View style={styles.loginButton}>
-              <Text style={styles.buttonText}>Sign In</Text>
-            </View>
-          </TouchableHighlight>
+          <SubmitButton text="Sign In" colour={colours.primary} />
         </View>
       </View>
     </TouchableWithoutFeedback>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  buttonText: {
-    color: "#fff",
-    fontSize: 20,
-  },
   container: {
     flex: 1,
     justifyContent: "center",
@@ -72,22 +65,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 50,
     backgroundColor: colours.background,
-  },
-  input: {
-    width: "100%",
-    height: 70,
-    paddingHorizontal: 20,
-    marginBottom: 25,
-    borderRadius: 10,
-    backgroundColor: "#fff",
-  },
-  loginButton: {
-    width: "100%",
-    height: 50,
-    backgroundColor: colours.primary,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
   },
   logo: {
     width: 150,
