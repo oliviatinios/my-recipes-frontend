@@ -1,14 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 
-import colours from "../config/colours";
-
 const SubmitButton = ({ text, colour, onSubmit }) => {
   return (
-    <TouchableHighlight
-      style={styles.button}
-      onPress={() => console.log("test")}
-    >
+    <TouchableHighlight style={styles.button} onPress={onSubmit}>
       <View style={[{ backgroundColor: colour }, styles.button]}>
         <Text style={styles.buttonText}>{text}</Text>
       </View>

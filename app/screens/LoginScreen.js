@@ -12,7 +12,7 @@ import InputField from "../components/InputField";
 import SubmitButton from "../components/SubmitButton";
 import colours from "../config/colours";
 
-const LoginScreen = (props) => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,6 +22,10 @@ const LoginScreen = (props) => {
 
   const handleChangePassword = (value) => {
     setPassword(value);
+  };
+
+  const handlePressButton = () => {
+    navigation.navigate("ViewAllRecipes");
   };
 
   return (
@@ -46,7 +50,11 @@ const LoginScreen = (props) => {
             isSecure={true}
             onChange={handleChangePassword}
           />
-          <SubmitButton text="Sign In" colour={colours.primary} />
+          <SubmitButton
+            text="Sign In"
+            colour={colours.primary}
+            onSubmit={handlePressButton}
+          />
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -78,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: colours.background,
   },
   titleText: {
-    fontSize: 30,
+    fontSize: 36,
   },
 });
 

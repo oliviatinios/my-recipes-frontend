@@ -22,6 +22,11 @@ const App = () => {
         }}
       >
         <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ title: "" }}
+        />
+        <Stack.Screen
           name="ViewAllRecipes"
           component={ViewAllRecipesScreen}
           options={{ title: "" }}
@@ -39,6 +44,7 @@ const App = () => {
 const styles = StyleSheet.create({
   header: {
     backgroundColor: colours.background,
+    shadowOpacity: 0,
   },
 });
 
