@@ -1,8 +1,45 @@
+import "react-native-gesture-handler";
 import React from "react";
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
+import colours from "./app/config/colours";
 import LoginScreen from "./app/screens/LoginScreen";
 import SignupScreen from "./app/screens/SignupScreen";
+import ViewAllRecipesScreen from "./app/screens/ViewAllRecipesScreen";
+import ViewRecipeScreen from "./app/screens/ViewRecipeScreen";
 
-export default function App() {
-  return <SignupScreen />;
-}
+const Stack = createStackNavigator();
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: styles.header,
+          headerTintColor: colours.light,
+        }}
+      >
+        <Stack.Screen
+          name="ViewAllRecipes"
+          component={ViewAllRecipesScreen}
+          options={{ title: "" }}
+        />
+        <Stack.Screen
+          name="ViewRecipe"
+          component={ViewRecipeScreen}
+          options={{ title: "" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+const styles = StyleSheet.create({
+  header: {
+    backgroundColor: colours.background,
+  },
+});
+
+export default App;
