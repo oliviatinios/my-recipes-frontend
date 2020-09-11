@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
@@ -26,6 +27,10 @@ const LoginScreen = ({ navigation }) => {
 
   const handlePressButton = () => {
     navigation.navigate("ViewAllRecipes");
+  };
+
+  const handlePressSignup = () => {
+    navigation.navigate("Signup");
   };
 
   return (
@@ -55,6 +60,11 @@ const LoginScreen = ({ navigation }) => {
             colour={colours.primary}
             onSubmit={handlePressButton}
           />
+          <TouchableOpacity onPress={handlePressSignup}>
+            <Text style={styles.text}>
+              Don't have an account? Sign up here!
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -85,8 +95,14 @@ const styles = StyleSheet.create({
     top: 20,
     backgroundColor: colours.background,
   },
+  text: {
+    textDecorationLine: "underline",
+    color: colours.dark,
+    margin: 5,
+  },
   titleText: {
     fontSize: 36,
+    color: colours.dark,
   },
 });
 
