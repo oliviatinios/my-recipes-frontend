@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-} from "react-native";
-import { ListItem, colors } from "react-native-elements";
+import { SafeAreaView, StyleSheet, Text, View, FlatList } from "react-native";
+import { Icon, ListItem } from "react-native-elements";
 import colours from "../config/colours";
 
 const ViewAllRecipesScreen = ({ navigation }) => {
@@ -86,7 +79,19 @@ const ViewAllRecipesScreen = ({ navigation }) => {
     });
   };
 
-  const renderHeader = () => <Text style={styles.title}>Recipes</Text>;
+  const renderHeader = () => (
+    <View style={styles.header}>
+      <Text style={styles.title}>Recipes</Text>
+      <Icon
+        reverse
+        name="md-add"
+        type="ionicon"
+        size={20}
+        color={colours.dark}
+        onPress={() => console.log("test")}
+      />
+    </View>
+  );
 
   const renderItem = ({ item }) => (
     <ListItem
@@ -124,6 +129,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colours.light,
+  },
+  header: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   itemSubtitle: {
     color: colours.titleText,
