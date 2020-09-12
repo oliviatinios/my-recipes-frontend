@@ -91,7 +91,13 @@ const ViewAllRecipesScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    fetchRecipes();
+    let mounted = true;
+
+    if (mounted) {
+      fetchRecipes();
+    }
+
+    return () => (mounted = false);
   }, []);
 
   return (
