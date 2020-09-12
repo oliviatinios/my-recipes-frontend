@@ -1,7 +1,7 @@
 export default {
   background: "sandybrown",
   primary: "tomato",
-  secondary: "steelblue",
+  secondary: "#aac16b",
   titleText: "whitesmoke",
   subtitleText: "#a9a9a9",
   light: "#fff",
