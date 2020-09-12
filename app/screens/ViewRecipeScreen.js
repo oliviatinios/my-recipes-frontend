@@ -1,16 +1,52 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View, SafeAreaView } from "react-native";
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  Text,
+  SafeAreaView,
+} from "react-native";
 import { Icon } from "react-native-elements";
 
 import colours from "../config/colours";
+import deleteRecipe from "../utils/deleteRecipe";
 import Card from "../components/Card";
 import List from "../components/List";
 import Toolbar from "../components/Toolbar";
 
 const ViewRecipeScreen = ({ route, navigation }) => {
-  const { title, subtitle, description, ingredients, steps } = route.params;
+  const {
+    _id,
+    title,
+    subtitle,
+    description,
+    ingredients,
+    steps,
+  } = route.params;
 
-  console.log(steps);
+  const handlePressDelete = () => {
+    deleteRecipe(_id)
+      .then((data) => {
+        console.log(data);
+        Alert.alert(
+          `Delete ${title}`,
+          "Are you sure you want to delete this recipe?",
+          [
+            {
+              text: "No",
+            },
+            {
+              text: "Yes",
+              onPress: () => navigation.push("ViewAllRecipes"),
+            },
+          ]
+        );
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
@@ -34,7 +70,7 @@ const ViewRecipeScreen = ({ route, navigation }) => {
           name="md-trash"
           type="ionicon"
           color={colours.dark}
-          onPress={() => console.log("test")}
+          onPress={handlePressDelete}
         />
         <Icon reverse name="md-create" type="ionicon" color={colours.dark} />
       </Toolbar>
