@@ -5,6 +5,7 @@ import {
   View,
   TouchableWithoutFeedback,
   Keyboard,
+  processColor,
 } from "react-native";
 
 import ErrorMessage from "../components/ErrorMessage";
@@ -62,6 +63,10 @@ const SignupScreen = ({ navigation }) => {
           });
         }
 
+        // Set up authorization token as environment variable
+        processColor.env.AUTH_TOKEN = data.token;
+
+        // Navigate to ViewAllRecipes screen
         navigation.navigate("ViewAllRecipes");
       })
       .catch((e) => {

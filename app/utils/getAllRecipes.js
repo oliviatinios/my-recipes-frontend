@@ -1,19 +1,15 @@
 import { BACKEND_URL } from "@env";
 
-const getAllRecipes = async (email, password) => {
+const getAllRecipes = async () => {
   const response = await fetch(`${BACKEND_URL}/recipes`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
     },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  });
+
+  return response.json();
 };
 
 export default getAllRecipes;

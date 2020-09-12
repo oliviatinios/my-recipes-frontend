@@ -1,68 +1,79 @@
-import React from "react";
-import { SafeAreaView, StyleSheet, Text, View, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Alert,
+} from "react-native";
 import { Icon, ListItem } from "react-native-elements";
+
+import getAllRecipes from "../utils/getAllRecipes";
 import colours from "../config/colours";
 
 const ViewAllRecipesScreen = ({ navigation }) => {
-  const recipes = [
-    {
-      _id: 1,
-      title: "Burrito Bowl",
-      description: "blah blah blah blah blah blah blah blah blah",
-      totalTime: 60,
-      ingredients: [],
-      steps: [],
-    },
-    {
-      _id: 2,
-      title: "Buddha Bowl",
-      totalTime: 45,
-      ingredients: [],
-      steps: [],
-    },
-    {
-      _id: 5,
-      title: "Pesto Pasta",
-      totalTime: 30,
-      ingredients: [],
-      steps: [],
-    },
-    {
-      _id: 6,
-      title: "Pesto Pasta",
-      totalTime: 30,
-      ingredients: [],
-      steps: [],
-    },
-    {
-      _id: 7,
-      title: "Pesto Pasta",
-      totalTime: 30,
-      ingredients: [],
-      steps: [],
-    },
-    {
-      _id: 8,
-      title: "Pesto Pasta",
-      totalTime: 30,
-      ingredients: [],
-      steps: [],
-    },
-    {
-      _id: 9,
-      title: "Pesto Pasta",
-      totalTime: 30,
-      ingredients: [],
-      steps: [],
-    },
-    {
-      _id: 10,
-      title: "Pesto Pasta",
-      totalTime: 30,
-      ingredients: [],
-      steps: [],
-    },
-  ];
+  // const recipes = [
+  //   {
+  //     _id: 1,
+  //     title: "Burrito Bowl",
+  //     description: "blah blah blah blah blah blah blah blah blah",
+  //     totalTime: 60,
+  //     ingredients: [],
+  //     steps: [],
+  //   },
+  //   {
+  //     _id: 2,
+  //     title: "Buddha Bowl",
+  //     totalTime: 45,
+  //     ingredients: [],
+  //     steps: [],
+  //   },
+  //   {
+  //     _id: 5,
+  //     title: "Pesto Pasta",
+  //     totalTime: 30,
+  //     ingredients: [],
+  //     steps: [],
+  //   },
+  //   {
+  //     _id: 6,
+  //     title: "Pesto Pasta",
+  //     totalTime: 30,
+  //     ingredients: [],
+  //     steps: [],
+  //   },
+  //   {
+  //     _id: 7,
+  //     title: "Pesto Pasta",
+  //     totalTime: 30,
+  //     ingredients: [],
+  //     steps: [],
+  //   },
+  //   {
+  //     _id: 8,
+  //     title: "Pesto Pasta",
+  //     totalTime: 30,
+  //     ingredients: [],
+  //     steps: [],
+  //   },
+  //   {
+  //     _id: 9,
+  //     title: "Pesto Pasta",
+  //     totalTime: 30,
+  //     ingredients: [],
+  //     steps: [],
+  //   },
+  //   {
+  //     _id: 10,
+  //     title: "Pesto Pasta",
+  //     totalTime: 30,
+  //     ingredients: [],
+  //     steps: [],
+  //   },
+  // ];
+
+  const [recipes, setRecipes] = useState([]);
 
   const keyExtractor = (item, index) => item._id.toString();
 
@@ -95,7 +106,6 @@ const ViewAllRecipesScreen = ({ navigation }) => {
 
   const renderItem = ({ item }) => (
     <ListItem
-      button
       containerStyle={styles.listItem}
       key={item._id}
       onPress={() => handleItemPress(item)}
@@ -113,6 +123,36 @@ const ViewAllRecipesScreen = ({ navigation }) => {
     </ListItem>
   );
 
+  // Fetch user recipes from backend API
+  const fetchRecipes = () => {
+    getAllRecipes()
+      .then((data) => {
+        // If authentication token is expired, go to login screen
+        if (data.error === "Please authenticate.") {
+          Alert.alert(
+            "Session Expired",
+            "Something went wrong! Please login again."
+          ),
+            [
+              {
+                text: "OK",
+              },
+            ];
+
+          navigation.navigate("Login");
+        } else {
+          setRecipes(data);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -123,6 +163,13 @@ const ViewAllRecipesScreen = ({ navigation }) => {
       />
       <View style={styles.footer}>
         <Text>{recipes.length + " recipes"}</Text>
+        <Icon
+          reverse
+          name="md-refresh"
+          type="ionicon"
+          color={colours.dark}
+          onPress={fetchRecipes}
+        />
       </View>
     </SafeAreaView>
   );

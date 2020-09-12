@@ -31,6 +31,10 @@ const LoginScreen = ({ navigation }) => {
   const handlePressLogin = () => {
     login(email, password)
       .then((data) => {
+        // Set up authorization token as environment variable
+        process.env.AUTH_TOKEN = data.token;
+
+        // Navigate to ViewAllRecipes screen
         navigation.navigate("ViewAllRecipes");
       })
       .catch(() => {
