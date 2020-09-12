@@ -36,7 +36,7 @@ const App = () => {
         <Stack.Screen
           name="ViewAllRecipes"
           component={ViewAllRecipesScreen}
-          options={{ title: "" }}
+          options={{ title: "", headerLeft: null }}
         />
         <Stack.Screen
           name="ViewRecipe"
