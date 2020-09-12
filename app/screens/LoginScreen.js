@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Image,
   StyleSheet,
@@ -9,11 +9,12 @@ import {
   Keyboard,
 } from "react-native";
 
+import colours from "../config/colours";
+import login from "../utils/login";
+import getUserProfile from "../utils/getUserProfile.js";
 import ErrorMessage from "../components/ErrorMessage";
 import InputField from "../components/InputField";
 import SubmitButton from "../components/SubmitButton";
-import login from "../utils/login";
-import colours from "../config/colours";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -45,6 +46,19 @@ const LoginScreen = ({ navigation }) => {
   const handlePressSignup = () => {
     navigation.navigate("Signup");
   };
+
+  // Check if user already has valid authorization token
+  useEffect(() => {
+    if (process.env.AUTH_TOKEN) {
+      getUserProfile()
+        .then((data) => {
+          navigation.navigate("ViewAllRecipes");
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  });
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
