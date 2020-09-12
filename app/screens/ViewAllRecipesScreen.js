@@ -27,7 +27,7 @@ const ViewAllRecipesScreen = ({ navigation }) => {
     steps,
   }) => {
     console.log(steps);
-    navigation.navigate("ViewRecipe", {
+    navigation.push("ViewRecipe", {
       _id,
       title,
       subtitle:
