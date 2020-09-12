@@ -31,7 +31,6 @@ const LoginScreen = ({ navigation }) => {
   const handlePressLogin = () => {
     login(email, password)
       .then((data) => {
-        console.log(data);
         navigation.navigate("ViewAllRecipes");
       })
       .catch(() => {
