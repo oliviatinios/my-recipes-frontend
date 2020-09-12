@@ -121,6 +121,9 @@ const ViewAllRecipesScreen = ({ navigation }) => {
         renderItem={renderItem}
         ListHeaderComponent={renderHeader}
       />
+      <View style={styles.footer}>
+        <Text>{recipes.length + " recipes"}</Text>
+      </View>
     </SafeAreaView>
   );
 };
@@ -129,6 +132,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colours.light,
+  },
+  footer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colours.light,
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    height: 60,
   },
   header: {
     flex: 1,
