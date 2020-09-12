@@ -18,16 +18,23 @@ const ViewAllRecipesScreen = ({ navigation }) => {
 
   const keyExtractor = (item, index) => item._id.toString();
 
-  const handleItemPress = (item) => {
+  const handleItemPress = ({
+    _id,
+    title,
+    totalTime,
+    description,
+    ingredients,
+    steps,
+  }) => {
+    console.log(steps);
     navigation.navigate("ViewRecipe", {
-      _id: item._id,
-      title: item.title,
+      _id,
+      title,
       subtitle:
-        "total time: " +
-        item.totalTime +
-        " min, ingredients: " +
-        item.ingredients.length,
-      description: item.description,
+        "total time: " + totalTime + " min, ingredients: " + ingredients.length,
+      description,
+      ingredients,
+      steps,
     });
   };
 
