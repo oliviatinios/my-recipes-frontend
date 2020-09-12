@@ -88,7 +88,7 @@ const SignupScreen = ({ navigation }) => {
       <View style={styles.container}>
         <View style={styles.logoContainer}>
           <Text style={styles.titleText}>
-            Enter your information below to signup for an account
+            Enter your information below to sign up for an account
           </Text>
         </View>
         <View style={styles.formContainer}>
