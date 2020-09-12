@@ -4,19 +4,8 @@ import { Icon } from "react-native-elements";
 
 import colours from "../config/colours";
 
-const Toolbar = (props) => {
-  return (
-    <View style={styles.container}>
-      <Icon
-        reverse
-        name="md-trash"
-        type="ionicon"
-        color={colours.dark}
-        onPress={() => console.log("test")}
-      />
-      <Icon reverse name="md-create" type="ionicon" color={colours.dark} />
-    </View>
-  );
+const Toolbar = ({ children }) => {
+  return <View style={styles.container}>{children}</View>;
 };
 
 const styles = StyleSheet.create({

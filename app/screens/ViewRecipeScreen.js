@@ -1,5 +1,6 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { Icon } from "react-native-elements";
 
 import colours from "../config/colours";
 import Toolbar from "../components/Toolbar";
@@ -23,7 +24,16 @@ const ViewRecipeScreen = ({ route, navigation }) => {
           <Text style={styles.header}>Steps</Text>
         </View>
       </ScrollView>
-      <Toolbar />
+      <Toolbar>
+        <Icon
+          reverse
+          name="md-trash"
+          type="ionicon"
+          color={colours.dark}
+          onPress={() => console.log("test")}
+        />
+        <Icon reverse name="md-create" type="ionicon" color={colours.dark} />
+      </Toolbar>
     </SafeAreaView>
   );
 };
