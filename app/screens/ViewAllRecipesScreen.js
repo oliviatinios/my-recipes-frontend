@@ -9,8 +9,9 @@ import {
 } from "react-native";
 import { Icon, ListItem } from "react-native-elements";
 
-import getAllRecipes from "../utils/getAllRecipes";
 import colours from "../config/colours";
+import getAllRecipes from "../utils/getAllRecipes";
+import Toolbar from "../components/Toolbar";
 
 const ViewAllRecipesScreen = ({ navigation }) => {
   // const recipes = [
@@ -161,7 +162,7 @@ const ViewAllRecipesScreen = ({ navigation }) => {
         renderItem={renderItem}
         ListHeaderComponent={renderHeader}
       />
-      <View style={styles.footer}>
+      <Toolbar>
         <Text>{recipes.length + " recipes"}</Text>
         <Icon
           reverse
@@ -170,7 +171,7 @@ const ViewAllRecipesScreen = ({ navigation }) => {
           color={colours.dark}
           onPress={fetchRecipes}
         />
-      </View>
+      </Toolbar>
     </SafeAreaView>
   );
 };
