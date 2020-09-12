@@ -27,7 +27,6 @@ const ViewRecipeScreen = ({ route, navigation }) => {
   const handlePressDelete = () => {
     deleteRecipe(_id)
       .then((data) => {
-        console.log(data);
         Alert.alert(
           `Delete ${title}`,
           "Are you sure you want to delete this recipe?",
