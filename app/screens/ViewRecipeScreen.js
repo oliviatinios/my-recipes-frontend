@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { Icon } from "react-native-elements";
 
 import colours from "../config/colours";
+import Card from "../components/Card";
 import List from "../components/List";
 import Toolbar from "../components/Toolbar";
 
@@ -15,27 +16,17 @@ const ViewRecipeScreen = ({ route, navigation }) => {
       <ScrollView style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subtitle}>{subtitle}</Text>
-        <View style={styles.innerContainer}>
-          {description && (
-            <View style={styles.headerContainer}>
-              <Text style={styles.header}>Description</Text>
-            </View>
-          )}
-          {description && <Text style={styles.description}>{description}</Text>}
-        </View>
-        <View style={styles.innerContainer}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.header}>Ingredients</Text>
-          </View>
+        {description && (
+          <Card title="Description">
+            <Text style={styles.description}>{description}</Text>
+          </Card>
+        )}
+        <Card title="Ingredients">
           <List data={ingredients} isOrdered={false} />
-        </View>
-        <View style={styles.innerContainer}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.header}>Steps</Text>
-          </View>
-
+        </Card>
+        <Card title="Steps">
           <List data={steps} isOrdered={true} />
-        </View>
+        </Card>
       </ScrollView>
       <Toolbar>
         <Icon
@@ -61,20 +52,6 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 5,
     color: colours.light,
-  },
-  innerContainer: {
-    backgroundColor: colours.secondary,
-    margin: 5,
-    borderRadius: 5,
-  },
-  header: {
-    fontSize: 24,
-    margin: 5,
-    color: colours.light,
-  },
-  headerContainer: {
-    borderBottomColor: colours.light,
-    borderBottomWidth: 1,
   },
   subtitle: {
     fontSize: 14,
