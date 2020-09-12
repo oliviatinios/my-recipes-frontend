@@ -15,36 +15,36 @@ const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <EditableList />
-    // <NavigationContainer>
-    //   <Stack.Navigator
-    //     screenOptions={{
-    //       headerStyle: styles.header,
-    //       headerTintColor: colours.light,
-    //     }}
-    //   >
-    //     <Stack.Screen
-    //       name="Login"
-    //       component={LoginScreen}
-    //       options={{ title: "" }}
-    //     />
-    //     <Stack.Screen
-    //       name="Signup"
-    //       component={SignupScreen}
-    //       options={{ title: "" }}
-    //     />
-    //     <Stack.Screen
-    //       name="ViewAllRecipes"
-    //       component={ViewAllRecipesScreen}
-    //       options={{ title: "" }}
-    //     />
-    //     <Stack.Screen
-    //       name="ViewRecipe"
-    //       component={ViewRecipeScreen}
-    //       options={{ title: "" }}
-    //     />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
+    // <EditableList />
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: styles.header,
+          headerTintColor: colours.light,
+        }}
+      >
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ title: "" }}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={SignupScreen}
+          options={{ title: "" }}
+        />
+        <Stack.Screen
+          name="ViewAllRecipes"
+          component={ViewAllRecipesScreen}
+          options={{ title: "" }}
+        />
+        <Stack.Screen
+          name="ViewRecipe"
+          component={ViewRecipeScreen}
+          options={{ title: "" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

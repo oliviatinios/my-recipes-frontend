@@ -11,6 +11,7 @@ import {
 
 import InputField from "../components/InputField";
 import SubmitButton from "../components/SubmitButton";
+import login from "../utils/login";
 import colours from "../config/colours";
 
 const LoginScreen = ({ navigation }) => {
@@ -25,8 +26,13 @@ const LoginScreen = ({ navigation }) => {
     setPassword(value);
   };
 
-  const handlePressButton = () => {
-    navigation.navigate("ViewAllRecipes");
+  const handlePressLogin = async () => {
+    try {
+      await login(email, password);
+      navigation.navigate("ViewAllRecipes");
+    } catch {
+      console.log("Something went wrong! Please try again.");
+    }
   };
 
   const handlePressSignup = () => {
@@ -58,7 +64,7 @@ const LoginScreen = ({ navigation }) => {
           <SubmitButton
             text="Sign In"
             colour={colours.primary}
-            onSubmit={handlePressButton}
+            onSubmit={handlePressLogin}
           />
           <TouchableOpacity onPress={handlePressSignup}>
             <Text style={styles.text}>
