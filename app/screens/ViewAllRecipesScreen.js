@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
   listItem: {
     backgroundColor: colours.primary,
     margin: 5,
+    borderRadius: 5,
   },
   title: {
     fontSize: 36,

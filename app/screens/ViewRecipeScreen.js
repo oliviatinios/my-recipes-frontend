@@ -13,8 +13,8 @@ const ViewRecipeScreen = ({ route, navigation }) => {
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subtitle}>{subtitle}</Text>
         <View style={styles.innerContainer}>
-          <Text style={styles.header}>Description</Text>
-          <Text style={styles.description}>{description}</Text>
+          {description && <Text style={styles.header}>Description</Text>}
+          {description && <Text style={styles.description}>{description}</Text>}
         </View>
         <View style={styles.innerContainer}>
           <Text style={styles.header}>Ingredients</Text>
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     backgroundColor: colours.secondary,
     margin: 5,
+    borderRadius: 5,
   },
   header: {
     fontSize: 24,

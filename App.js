@@ -9,40 +9,42 @@ import LoginScreen from "./app/screens/LoginScreen";
 import SignupScreen from "./app/screens/SignupScreen";
 import ViewAllRecipesScreen from "./app/screens/ViewAllRecipesScreen";
 import ViewRecipeScreen from "./app/screens/ViewRecipeScreen";
+import EditableList from "./app/components/EditableList";
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: styles.header,
-          headerTintColor: colours.light,
-        }}
-      >
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ title: "" }}
-        />
-        <Stack.Screen
-          name="Signup"
-          component={SignupScreen}
-          options={{ title: "" }}
-        />
-        <Stack.Screen
-          name="ViewAllRecipes"
-          component={ViewAllRecipesScreen}
-          options={{ title: "" }}
-        />
-        <Stack.Screen
-          name="ViewRecipe"
-          component={ViewRecipeScreen}
-          options={{ title: "" }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <EditableList />
+    // <NavigationContainer>
+    //   <Stack.Navigator
+    //     screenOptions={{
+    //       headerStyle: styles.header,
+    //       headerTintColor: colours.light,
+    //     }}
+    //   >
+    //     <Stack.Screen
+    //       name="Login"
+    //       component={LoginScreen}
+    //       options={{ title: "" }}
+    //     />
+    //     <Stack.Screen
+    //       name="Signup"
+    //       component={SignupScreen}
+    //       options={{ title: "" }}
+    //     />
+    //     <Stack.Screen
+    //       name="ViewAllRecipes"
+    //       component={ViewAllRecipesScreen}
+    //       options={{ title: "" }}
+    //     />
+    //     <Stack.Screen
+    //       name="ViewRecipe"
+    //       component={ViewRecipeScreen}
+    //       options={{ title: "" }}
+    //     />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
   );
 };
 
