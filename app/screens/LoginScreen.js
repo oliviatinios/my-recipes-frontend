@@ -9,6 +9,7 @@ import {
   Keyboard,
 } from "react-native";
 
+import ErrorMessage from "../components/ErrorMessage";
 import InputField from "../components/InputField";
 import SubmitButton from "../components/SubmitButton";
 import login from "../utils/login";
@@ -17,6 +18,7 @@ import colours from "../config/colours";
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleChangeEmail = (value) => {
     setEmail(value);
@@ -26,13 +28,15 @@ const LoginScreen = ({ navigation }) => {
     setPassword(value);
   };
 
-  const handlePressLogin = async () => {
-    try {
-      await login(email, password);
-      navigation.navigate("ViewAllRecipes");
-    } catch {
-      console.log("Something went wrong! Please try again.");
-    }
+  const handlePressLogin = () => {
+    login(email, password)
+      .then((data) => {
+        console.log(data);
+        navigation.navigate("ViewAllRecipes");
+      })
+      .catch(() => {
+        setError("Wrong username or password! Try again.");
+      });
   };
 
   const handlePressSignup = () => {
@@ -47,6 +51,7 @@ const LoginScreen = ({ navigation }) => {
           <Text style={styles.titleText}>My Recipes</Text>
         </View>
         <View style={styles.formContainer}>
+          <ErrorMessage error={error} />
           <InputField
             key="email"
             id="email"
@@ -84,10 +89,11 @@ const styles = StyleSheet.create({
     backgroundColor: colours.background,
   },
   formContainer: {
-    flex: 1,
+    flex: 3,
     justifyContent: "flex-start",
     alignItems: "center",
-    padding: 50,
+    paddingHorizontal: 50,
+    paddingVertical: 20,
     backgroundColor: colours.background,
   },
   logo: {
@@ -95,10 +101,9 @@ const styles = StyleSheet.create({
     height: 150,
   },
   logoContainer: {
-    flex: 1,
+    flex: 2,
     justifyContent: "center",
     alignItems: "center",
-    top: 20,
     backgroundColor: colours.background,
   },
   text: {

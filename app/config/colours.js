@@ -6,4 +6,5 @@ export default {
   subtitleText: "#a9a9a9",
   light: "#fff",
   dark: "#444",
+  error: "red",
 };

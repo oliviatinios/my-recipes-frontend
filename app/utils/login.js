@@ -5,16 +5,17 @@ const login = async (email, password) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify({ email, password }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  });
+
+  //TODO: Handle 'JSON Parse error: Unexpected EOF'
+  if (response.status === 400) {
+    throw new Error();
+  }
+
+  return response.json();
 };
 
 export default login;
