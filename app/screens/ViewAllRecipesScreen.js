@@ -14,66 +14,6 @@ import getAllRecipes from "../utils/getAllRecipes";
 import Toolbar from "../components/Toolbar";
 
 const ViewAllRecipesScreen = ({ navigation }) => {
-  // const recipes = [
-  //   {
-  //     _id: 1,
-  //     title: "Burrito Bowl",
-  //     description: "blah blah blah blah blah blah blah blah blah",
-  //     totalTime: 60,
-  //     ingredients: [],
-  //     steps: [],
-  //   },
-  //   {
-  //     _id: 2,
-  //     title: "Buddha Bowl",
-  //     totalTime: 45,
-  //     ingredients: [],
-  //     steps: [],
-  //   },
-  //   {
-  //     _id: 5,
-  //     title: "Pesto Pasta",
-  //     totalTime: 30,
-  //     ingredients: [],
-  //     steps: [],
-  //   },
-  //   {
-  //     _id: 6,
-  //     title: "Pesto Pasta",
-  //     totalTime: 30,
-  //     ingredients: [],
-  //     steps: [],
-  //   },
-  //   {
-  //     _id: 7,
-  //     title: "Pesto Pasta",
-  //     totalTime: 30,
-  //     ingredients: [],
-  //     steps: [],
-  //   },
-  //   {
-  //     _id: 8,
-  //     title: "Pesto Pasta",
-  //     totalTime: 30,
-  //     ingredients: [],
-  //     steps: [],
-  //   },
-  //   {
-  //     _id: 9,
-  //     title: "Pesto Pasta",
-  //     totalTime: 30,
-  //     ingredients: [],
-  //     steps: [],
-  //   },
-  //   {
-  //     _id: 10,
-  //     title: "Pesto Pasta",
-  //     totalTime: 30,
-  //     ingredients: [],
-  //     steps: [],
-  //   },
-  // ];
-
   const [recipes, setRecipes] = useState([]);
 
   const keyExtractor = (item, index) => item._id.toString();
