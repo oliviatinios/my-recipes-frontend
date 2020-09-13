@@ -5,17 +5,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import colours from "./app/config/colours";
+import EditRecipeScreen from "./app/screens/EditRecipeScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import SignupScreen from "./app/screens/SignupScreen";
 import ViewAllRecipesScreen from "./app/screens/ViewAllRecipesScreen";
 import ViewRecipeScreen from "./app/screens/ViewRecipeScreen";
-import EditableList from "./app/components/EditableList";
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    // <EditableList />
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
@@ -42,6 +41,11 @@ const App = () => {
           name="ViewRecipe"
           component={ViewRecipeScreen}
           options={{ title: "" }}
+        />
+        <Stack.Screen
+          name="EditRecipe"
+          component={EditRecipeScreen}
+          options={{ title: "", headerLeft: null }}
         />
       </Stack.Navigator>
     </NavigationContainer>
