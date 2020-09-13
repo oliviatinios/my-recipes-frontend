@@ -7,9 +7,10 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { Icon } from "react-native-elements";
+import { Icon, registerCustomIconType } from "react-native-elements";
 
 import colours from "../config/colours";
+import updateRecipe from "../utils/updateRecipe";
 import Card from "../components/Card";
 import EditableList from "../components/EditableList";
 import Toolbar from "../components/Toolbar";
@@ -25,7 +26,6 @@ const EditRecipeScreen = ({ route, navigation }) => {
   } = route.params;
 
   const [recipe, setRecipe] = useState({
-    _id,
     title,
     totalTime: totalTime.toString(),
     description,
@@ -81,6 +81,26 @@ const EditRecipeScreen = ({ route, navigation }) => {
         ...recipe[listType].slice(index + 1),
       ],
     });
+  };
+
+  // Handles press actions on the submit button in the toolbar
+  const handlePressSubmitButton = () => {
+    const updatedRecipe = { ...recipe };
+    updatedRecipe.totalTime = Number(updatedRecipe.totalTime);
+    updateRecipe(_id, updatedRecipe)
+      .then(({ _id, title, totalTime, description, ingredients, steps }) => {
+        navigation.push("ViewRecipe", {
+          _id,
+          title,
+          totalTime,
+          description,
+          ingredients,
+          steps,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -143,7 +163,13 @@ const EditRecipeScreen = ({ route, navigation }) => {
           color={colours.dark}
           onPress={() => navigation.goBack()}
         />
-        <Icon reverse name="md-checkmark" type="ionicon" color={colours.dark} />
+        <Icon
+          reverse
+          name="md-checkmark"
+          type="ionicon"
+          color={colours.dark}
+          onPress={handlePressSubmitButton}
+        />
       </Toolbar>
     </SafeAreaView>
   );

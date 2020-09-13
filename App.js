@@ -45,7 +45,7 @@ const App = () => {
         <Stack.Screen
           name="EditRecipe"
           component={EditRecipeScreen}
-          options={{ title: "" }}
+          options={{ title: "", headerLeft: null }}
         />
       </Stack.Navigator>
     </NavigationContainer>

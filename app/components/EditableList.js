@@ -13,8 +13,6 @@ const EditableList = ({
   onPressAddButton,
   onPressRemoveButton,
 }) => {
-  const handleChangeText = (value) => {};
-
   return (
     <View style={styles.container}>
       {data.map((item, index) => (
