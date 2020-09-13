@@ -27,14 +27,60 @@ const EditRecipeScreen = ({ route, navigation }) => {
   const [recipe, setRecipe] = useState({
     _id,
     title,
-    totalTime,
+    totalTime: totalTime.toString(),
     description,
     ingredients,
     steps,
   });
 
+  // Stores the new input values for ingredients and steps
+  const [newInput, setNewInput] = useState({});
+
+  // Handles changes in the input fields
   const handleChangeText = (field, value) => {
     setRecipe({ ...recipe, [field]: value });
+    console.log(recipe);
+  };
+
+  // Handles changes in the input fields inside of EditableList
+  const handleChangeListInput = (listType, value, index) => {
+    let newValue = { ...recipe[listType][index], value };
+    setRecipe({
+      ...recipe,
+      [listType]: [
+        ...recipe[listType].slice(0, index),
+        newValue,
+        ...recipe[listType].slice(index + 1),
+      ],
+    });
+  };
+
+  // Handles changes to the new input field inside of EditableList
+  const handleChangeNewListInput = (listType, value) => {
+    setNewInput({ ...newInput, [listType]: value });
+  };
+
+  // Handles press actions on the add item buttons
+  // TODO: if the input field is blank, show an error message
+  const handlePressAddButton = async (listType) => {
+    if (newInput[listType]) {
+      await setRecipe({
+        ...recipe,
+        [listType]: [...recipe[listType], { value: newInput[listType] }],
+      });
+      setNewInput({ ...newInput, [listType]: "" });
+    }
+  };
+
+  // Handles press actions on the remove item buttons
+  const handlePressRemoveButton = (listType, index) => {
+    setRecipe({
+      ...recipe,
+      [listType]: [
+        ...recipe[listType].slice(0, index),
+        ...recipe[listType].slice(index + 1),
+      ],
+    });
   };
 
   return (
@@ -67,10 +113,26 @@ const EditRecipeScreen = ({ route, navigation }) => {
           </View>
         </Card>
         <Card title="Ingredients">
-          <EditableList title="ingredients" data={ingredients} />
+          <EditableList
+            type="ingredients"
+            data={recipe.ingredients}
+            newInputValue={newInput.ingredients}
+            onChangeInputValues={handleChangeListInput}
+            onChangeNewInputValue={handleChangeNewListInput}
+            onPressAddButton={handlePressAddButton}
+            onPressRemoveButton={handlePressRemoveButton}
+          />
         </Card>
         <Card title="Steps">
-          <EditableList title="steps" data={steps} />
+          <EditableList
+            type="steps"
+            data={recipe.steps}
+            newInputValue={newInput.steps}
+            onChangeInputValues={handleChangeListInput}
+            onChangeNewInputValue={handleChangeNewListInput}
+            onPressAddButton={handlePressAddButton}
+            onPressRemoveButton={handlePressRemoveButton}
+          />
         </Card>
       </ScrollView>
       <Toolbar>
