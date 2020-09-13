@@ -8,107 +8,67 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Icon, ListItem } from "react-native-elements";
-import Swipeable from "react-native-swipeable";
+import { Icon } from "react-native-elements";
 
 import colours from "../config/colours";
+import EditableListItem from "../components/EditableListItem";
 
-const EditableList = (props) => {
-  const [inputValue, setInputValue] = useState("");
-  const [listItems, setListItems] = useState([
-    "1 can of beans",
-    "2 cups of rice",
-    "1 can of tomato paste",
+const EditableList = ({ title, data }) => {
+  const [newInputValue, setNewInputValue] = useState("");
+  const [inputValues, setInputValues] = useState([
+    { value: "beans" },
+    { value: "rice" },
   ]);
 
-  const handleChangeInputValue = (value) => {
-    setInputValue(value);
+  const handleChangeInputValues = (value, index) => {
+    let newInputValue = { ...inputValues[index], value };
+    setInputValues([
+      ...inputValues.slice(0, index),
+      newInputValue,
+      ...inputValues.slice(index + 1),
+    ]);
+  };
+
+  const handleChangeNewInputValue = (value) => {
+    setNewInputValue(value);
   };
 
   const handlePressAddButton = () => {
-    setListItems([...listItems, inputValue]);
-    setInputValue("");
+    setInputValues([...inputValues, { value: newInputValue }]);
+    setNewInputValue("");
   };
 
-  const keyExtractor = (item, index) => index.toString();
-
-  const renderItem = ({ item, index }) => (
-    <Swipeable rightButtons={renderRightButton(index)} rightButtonWidth={75}>
-      <ListItem containerStyle={styles.listItem} key={index}>
-        <ListItem.Content>
-          <ListItem.Title style={styles.itemText}>{item}</ListItem.Title>
-        </ListItem.Content>
-      </ListItem>
-    </Swipeable>
-  );
-
-  const renderRightButton = (index) => {
-    return [
-      <View style={styles.deleteContainer}>
-        <TouchableOpacity
-          style={styles.deleteButton}
-          onPress={() => deleteItem(index)}
-        >
-          <Text style={styles.deleteText}>Delete</Text>
-        </TouchableOpacity>
-      </View>,
-    ];
-  };
-
-  const deleteItem = (index) => {
-    const newListItems = listItems.splice(index, 1);
-    setListItems([...newListItems]);
+  const handlePressRemoveButton = (index) => {
+    setInputValues([
+      ...inputValues.slice(0, index),
+      ...inputValues.slice(index + 1),
+    ]);
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        keyExtractor={keyExtractor}
-        data={listItems}
-        renderItem={renderItem}
+      {inputValues.map((item, index) => (
+        <EditableListItem
+          inputValue={inputValues[index].value}
+          placeholder=""
+          iconType="md-remove"
+          onChangeText={(value) => handleChangeInputValues(value, index)}
+          onPressIcon={() => handlePressRemoveButton(index)}
+        />
+      ))}
+      <EditableListItem
+        inputValue={newInputValue}
+        placeholder={`Add a new ${title} here...`}
+        iconType="md-add"
+        onChangeText={handleChangeNewInputValue}
+        onPressIcon={handlePressAddButton}
       />
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          onChangeText={handleChangeInputValue}
-          value={inputValue}
-          placeholder="Add a new ingredient here..."
-        />
-        <Icon
-          reverse
-          name="md-add"
-          type="ionicon"
-          size={16}
-          color={colours.dark}
-          onPress={handlePressAddButton}
-        />
-      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: colours.secondary,
-  },
-  input: {
-    width: "70%",
-    height: 50,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    backgroundColor: "#fff",
-  },
-  inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  itemText: {
-    color: colours.light,
-  },
-  listItem: {
-    width: "70%",
-    height: 50,
     backgroundColor: colours.secondary,
   },
 });
