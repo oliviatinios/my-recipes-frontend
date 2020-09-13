@@ -45,7 +45,7 @@ const ViewAllRecipesScreen = ({ navigation }) => {
         type="ionicon"
         size={20}
         color={colours.dark}
-        onPress={() => console.log("test")}
+        onPress={() => navigation.push("AddRecipe")}
       />
     </View>
   );
