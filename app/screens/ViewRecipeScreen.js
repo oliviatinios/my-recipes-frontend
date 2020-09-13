@@ -18,11 +18,22 @@ const ViewRecipeScreen = ({ route, navigation }) => {
   const {
     _id,
     title,
-    subtitle,
+    totalTime,
     description,
     ingredients,
     steps,
   } = route.params;
+
+  const handlePressEdit = () => {
+    navigation.push("EditRecipe", {
+      _id,
+      title,
+      totalTime,
+      description,
+      ingredients,
+      steps,
+    });
+  };
 
   const handlePressDelete = () => {
     deleteRecipe(_id)
@@ -50,7 +61,9 @@ const ViewRecipeScreen = ({ route, navigation }) => {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.subtitle}>{subtitle}</Text>
+        <Text
+          style={styles.subtitle}
+        >{`total time: ${totalTime} min, ingredients: ${ingredients.length}`}</Text>
         {description && (
           <Card title="Description">
             <Text style={styles.description}>{description}</Text>
@@ -71,7 +84,13 @@ const ViewRecipeScreen = ({ route, navigation }) => {
           color={colours.dark}
           onPress={handlePressDelete}
         />
-        <Icon reverse name="md-create" type="ionicon" color={colours.dark} />
+        <Icon
+          reverse
+          name="md-create"
+          type="ionicon"
+          color={colours.dark}
+          onPress={handlePressEdit}
+        />
       </Toolbar>
     </SafeAreaView>
   );

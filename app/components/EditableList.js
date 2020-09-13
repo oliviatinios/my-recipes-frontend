@@ -1,24 +1,12 @@
 import React, { useState } from "react";
-import {
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { Icon } from "react-native-elements";
+import { StyleSheet, View } from "react-native";
 
 import colours from "../config/colours";
 import EditableListItem from "../components/EditableListItem";
 
 const EditableList = ({ title, data }) => {
   const [newInputValue, setNewInputValue] = useState("");
-  const [inputValues, setInputValues] = useState([
-    { value: "beans" },
-    { value: "rice" },
-  ]);
+  const [inputValues, setInputValues] = useState(data);
 
   const handleChangeInputValues = (value, index) => {
     let newInputValue = { ...inputValues[index], value };
@@ -46,7 +34,7 @@ const EditableList = ({ title, data }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {inputValues.map((item, index) => (
         <EditableListItem
           inputValue={inputValues[index].value}
@@ -63,13 +51,15 @@ const EditableList = ({ title, data }) => {
         onChangeText={handleChangeNewInputValue}
         onPressIcon={handlePressAddButton}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colours.secondary,
+    borderRadius: 5,
+    padding: 5,
   },
 });
 

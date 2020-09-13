@@ -29,8 +29,7 @@ const ViewAllRecipesScreen = ({ navigation }) => {
     navigation.push("ViewRecipe", {
       _id,
       title,
-      subtitle:
-        "total time: " + totalTime + " min, ingredients: " + ingredients.length,
+      totalTime,
       description,
       ingredients,
       steps,
@@ -60,10 +59,7 @@ const ViewAllRecipesScreen = ({ navigation }) => {
       <ListItem.Content>
         <ListItem.Title style={styles.itemTitle}>{item.title}</ListItem.Title>
         <ListItem.Subtitle style={styles.itemSubtitle}>
-          {"total time: " +
-            item.totalTime +
-            " min, ingredients: " +
-            item.ingredients.length}
+          {`total time: ${item.totalTime} min, ingredients: ${item.ingredients.length}`}
         </ListItem.Subtitle>
       </ListItem.Content>
       <ListItem.Chevron color="white" />

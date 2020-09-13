@@ -33,7 +33,7 @@ const EditableListItem = ({
 
 const styles = StyleSheet.create({
   input: {
-    width: "70%",
+    width: "80%",
     height: 50,
     paddingHorizontal: 20,
     borderRadius: 10,
