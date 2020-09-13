@@ -10,28 +10,21 @@ import {
 import { Icon } from "react-native-elements";
 
 import colours from "../config/colours";
-import updateRecipe from "../utils/updateRecipe";
+import createRecipe from "../utils/createRecipe";
 import Card from "../components/Card";
 import EditableList from "../components/EditableList";
 import Toolbar from "../components/Toolbar";
 
-const EditRecipeScreen = ({ route, navigation }) => {
-  const {
-    _id,
-    title,
-    totalTime,
-    description,
-    ingredients,
-    steps,
-  } = route.params;
+const initialState = {
+  title: "",
+  totalTime: "",
+  description: "",
+  ingredients: [],
+  steps: [],
+};
 
-  const [recipe, setRecipe] = useState({
-    title,
-    totalTime: totalTime.toString(),
-    description,
-    ingredients,
-    steps,
-  });
+const AddRecipeScreen = ({ navigation }) => {
+  const [recipe, setRecipe] = useState(initialState);
 
   // Stores the new input values for ingredients and steps
   const [newInput, setNewInput] = useState({});
@@ -83,19 +76,17 @@ const EditRecipeScreen = ({ route, navigation }) => {
   };
 
   // Handles press actions on the submit button in the toolbar
+  // TODO: add error handling for when user doesn't provide all required fields
   const handlePressSubmitButton = () => {
-    const updatedRecipe = { ...recipe };
-    updatedRecipe.totalTime = Number(updatedRecipe.totalTime);
-    updateRecipe(_id, updatedRecipe)
-      .then(({ _id, title, totalTime, description, ingredients, steps }) => {
-        navigation.navigate("ViewRecipe", {
-          _id,
-          title,
-          totalTime,
-          description,
-          ingredients,
-          steps,
-        });
+    const newRecipe = { ...recipe };
+    newRecipe.totalTime = Number(newRecipe.totalTime);
+
+    createRecipe(newRecipe)
+      .then((data) => {
+        if (data.errors) {
+          return alert("Please fill in all input fields.");
+        }
+        navigation.push("ViewAllRecipes");
       })
       .catch((e) => {
         console.log(e);
@@ -105,7 +96,7 @@ const EditRecipeScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
-        <Text style={styles.title}>Edit Recipe</Text>
+        <Text style={styles.title}>New Recipe</Text>
         <Card title="Details">
           <View style={styles.inputContainer}>
             <Text style={{ color: colours.light }}>Title:</Text>
@@ -197,4 +188,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EditRecipeScreen;
+export default AddRecipeScreen;
