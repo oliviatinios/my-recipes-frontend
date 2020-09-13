@@ -53,6 +53,8 @@ const ViewAllRecipesScreen = ({ navigation }) => {
   const renderItem = ({ item }) => (
     <ListItem
       containerStyle={styles.listItem}
+      activeOpacity={0.6}
+      underlayColor="#dddddd"
       key={item._id}
       onPress={() => handleItemPress(item)}
     >
