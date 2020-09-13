@@ -13,4 +13,4 @@ const createRecipe = async (newRecipe) => {
   return response.json();
 };
 
-export default updateRecipe;
+export default createRecipe;

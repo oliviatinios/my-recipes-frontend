@@ -39,7 +39,6 @@ const EditRecipeScreen = ({ route, navigation }) => {
   // Handles changes in the input fields
   const handleChangeText = (field, value) => {
     setRecipe({ ...recipe, [field]: value });
-    console.log(recipe);
   };
 
   // Handles changes in the input fields inside of EditableList

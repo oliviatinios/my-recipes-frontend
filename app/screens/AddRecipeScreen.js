@@ -10,19 +10,21 @@ import {
 import { Icon } from "react-native-elements";
 
 import colours from "../config/colours";
-import createRecipe from "../utils/updateRecipe";
+import createRecipe from "../utils/createRecipe";
 import Card from "../components/Card";
 import EditableList from "../components/EditableList";
 import Toolbar from "../components/Toolbar";
 
+const initialState = {
+  title: "",
+  totalTime: "",
+  description: "",
+  ingredients: [],
+  steps: [],
+};
+
 const AddRecipeScreen = ({ navigation }) => {
-  const [recipe, setRecipe] = useState({
-    title: "",
-    totalTime: "",
-    description: "",
-    ingredients: [],
-    steps: [],
-  });
+  const [recipe, setRecipe] = useState(initialState);
 
   // Stores the new input values for ingredients and steps
   const [newInput, setNewInput] = useState({});
@@ -30,7 +32,6 @@ const AddRecipeScreen = ({ navigation }) => {
   // Handles changes in the input fields
   const handleChangeText = (field, value) => {
     setRecipe({ ...recipe, [field]: value });
-    console.log(recipe);
   };
 
   // Handles changes in the input fields inside of EditableList
@@ -79,8 +80,12 @@ const AddRecipeScreen = ({ navigation }) => {
   const handlePressSubmitButton = () => {
     const newRecipe = { ...recipe };
     newRecipe.totalTime = Number(newRecipe.totalTime);
-    createRecipe(_newRecipe)
+
+    createRecipe(newRecipe)
       .then((data) => {
+        if (data.errors) {
+          return alert("Please fill in all input fields.");
+        }
         navigation.push("ViewAllRecipes");
       })
       .catch((e) => {
