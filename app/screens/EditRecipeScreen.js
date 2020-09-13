@@ -89,7 +89,7 @@ const EditRecipeScreen = ({ route, navigation }) => {
     updatedRecipe.totalTime = Number(updatedRecipe.totalTime);
     updateRecipe(_id, updatedRecipe)
       .then(({ _id, title, totalTime, description, ingredients, steps }) => {
-        navigation.push("ViewRecipe", {
+        navigation.navigate("ViewRecipe", {
           _id,
           title,
           totalTime,

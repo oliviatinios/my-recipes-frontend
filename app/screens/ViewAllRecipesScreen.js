@@ -82,7 +82,7 @@ const ViewAllRecipesScreen = ({ navigation }) => {
               },
             ];
 
-          navigation.navigate("Login");
+          navigation.popToTop();
         } else {
           setRecipes(data);
         }
