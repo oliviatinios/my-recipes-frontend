@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Text } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import colours from "../config/colours";
 import getUserProfile from "../utils/getUserProfile";
 import Card from "../components/Card";
+import SubmitButton from "../components/SubmitButton";
 
-const UserProfileScreen = ({ navigation }) => {
+const UserProfileScreen = () => {
   const [profile, setProfile] = useState({});
 
   useEffect(() => {
@@ -25,21 +26,42 @@ const UserProfileScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.container}>
-        <Text style={styles.title}>Profile</Text>
-        <Card title="About Me">
-          <Text style={{ color: colours.light }}>Name: </Text>
-          <Text style={{ color: colours.light }}>{profile.name}</Text>
-        </Card>
-
-        <Card title="Options"></Card>
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView style={styles.container}>
+      <Text style={styles.title}>Profile</Text>
+      <Card title="About Me">
+        <Text style={styles.body}>{`Name: ${profile.name}`}</Text>
+        <Text style={styles.body}>{`Email: ${profile.email}`}</Text>
+        <Text style={styles.body}>{`Joined: ${new Date(
+          profile.createdAt
+        ).toDateString()}`}</Text>
+      </Card>
+      <View style={styles.buttonContainer}>
+        <SubmitButton text="Change Email" colour={colours.button} />
+      </View>
+      <View style={styles.buttonContainer}>
+        <SubmitButton text="Change Password" colour={colours.button} />
+      </View>
+      <View style={styles.buttonContainer}>
+        <SubmitButton text="Log Out" colour={colours.primary} />
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  body: {
+    color: colours.light,
+    fontSize: 16,
+    padding: 10,
+  },
+  buttonContainer: {
+    paddingTop: 10,
+    paddingHorizontal: 5,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: colours.light,
+  },
   title: {
     fontSize: 36,
     margin: 5,
