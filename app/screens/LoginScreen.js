@@ -36,7 +36,7 @@ const LoginScreen = ({ navigation }) => {
         process.env.AUTH_TOKEN = data.token;
 
         // Navigate to ViewAllRecipes screen
-        navigation.navigate("ViewAllRecipes");
+        navigation.navigate("Home");
       })
       .catch(() => {
         setError("Wrong username or password! Try again.");
@@ -52,7 +52,7 @@ const LoginScreen = ({ navigation }) => {
     if (process.env.AUTH_TOKEN) {
       getUserProfile()
         .then((data) => {
-          navigation.navigate("ViewAllRecipes");
+          navigation.navigate("Home");
         })
         .catch((e) => {
           console.log(e);

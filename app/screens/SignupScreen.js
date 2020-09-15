@@ -67,7 +67,7 @@ const SignupScreen = ({ navigation }) => {
         processColor.env.AUTH_TOKEN = data.token;
 
         // Navigate to ViewAllRecipes screen
-        navigation.navigate("ViewAllRecipes");
+        navigation.navigate("Home");
       })
       .catch((e) => {
         console.log(e);
