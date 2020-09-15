@@ -47,7 +47,7 @@ const ViewRecipeScreen = ({ route, navigation }) => {
             },
             {
               text: "Yes",
-              onPress: () => navigation.push("ViewAllRecipes"),
+              onPress: () => navigation.push("Home"),
             },
           ]
         );

@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Text } from "react-native";
 
+import colours from "../config/colours";
 import getUserProfile from "../utils/getUserProfile";
 import Card from "../components/Card";
 
 const UserProfileScreen = ({ navigation }) => {
-  const [profile, setProfile] = setState({});
+  const [profile, setProfile] = useState({});
 
   useEffect(() => {
     let mounted = true;
