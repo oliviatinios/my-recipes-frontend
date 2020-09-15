@@ -2,12 +2,23 @@ import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import colours from "../config/colours";
+import logout from "../utils/logout";
 import getUserProfile from "../utils/getUserProfile";
 import Card from "../components/Card";
 import SubmitButton from "../components/SubmitButton";
 
-const UserProfileScreen = () => {
+const UserProfileScreen = ({ navigation }) => {
   const [profile, setProfile] = useState({});
+
+  const handlePressLogout = () => {
+    logout()
+      .then(() => {
+        navigation.popToTop();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   useEffect(() => {
     let mounted = true;
@@ -42,7 +53,11 @@ const UserProfileScreen = () => {
         <SubmitButton text="Change Password" colour={colours.button} />
       </View>
       <View style={styles.buttonContainer}>
-        <SubmitButton text="Log Out" colour={colours.primary} />
+        <SubmitButton
+          text="Log Out"
+          colour={colours.primary}
+          onSubmit={handlePressLogout}
+        />
       </View>
     </ScrollView>
   );
