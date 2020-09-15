@@ -80,6 +80,7 @@ const AddRecipeScreen = ({ navigation }) => {
   const handlePressSubmitButton = () => {
     const newRecipe = { ...recipe };
     newRecipe.totalTime = Number(newRecipe.totalTime);
+    newRecipe.title = newRecipe.title.toLowerCase();
 
     createRecipe(newRecipe)
       .then((data) => {

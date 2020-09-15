@@ -86,6 +86,8 @@ const EditRecipeScreen = ({ route, navigation }) => {
   const handlePressSubmitButton = () => {
     const updatedRecipe = { ...recipe };
     updatedRecipe.totalTime = Number(updatedRecipe.totalTime);
+    updatedRecipe.title = updatedRecipe.title.toLowerCase();
+
     updateRecipe(_id, updatedRecipe)
       .then(({ _id, title, totalTime, description, ingredients, steps }) => {
         navigation.navigate("ViewRecipe", {
