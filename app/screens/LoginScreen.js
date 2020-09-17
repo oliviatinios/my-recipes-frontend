@@ -64,7 +64,7 @@ const LoginScreen = ({ navigation }) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
         <View style={styles.logoContainer}>
-          <Image style={styles.logo} source={require("../assets/logo.png")} />
+          <Image style={styles.logo} source={require("../assets/icon.png")} />
           <Text style={styles.titleText}>My Recipes</Text>
         </View>
         <View style={styles.formContainer}>
