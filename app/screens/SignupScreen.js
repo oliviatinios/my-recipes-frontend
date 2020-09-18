@@ -138,10 +138,6 @@ const styles = StyleSheet.create({
     padding: 50,
     backgroundColor: colours.background,
   },
-  logo: {
-    width: 150,
-    height: 150,
-  },
   logoContainer: {
     justifyContent: "flex-start",
     alignItems: "center",
