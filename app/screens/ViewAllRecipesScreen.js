@@ -95,14 +95,10 @@ const ViewAllRecipesScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    let mounted = true;
-
-    if (mounted) {
+    navigation.addListener("focus", () => {
       fetchRecipes();
-    }
-
-    return () => (mounted = false);
-  }, []);
+    });
+  }, [navigation]);
 
   return (
     <SafeAreaView style={styles.container}>

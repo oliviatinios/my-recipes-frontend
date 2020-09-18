@@ -87,7 +87,7 @@ const AddRecipeScreen = ({ navigation }) => {
         if (data.errors) {
           return alert("Please fill in all input fields.");
         }
-        navigation.push("Home");
+        navigation.navigate("Home");
       })
       .catch((e) => {
         console.log(e);
